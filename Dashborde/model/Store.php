@@ -1,9 +1,12 @@
 <?php
 require_once 'Model.php';
+require_once 'Category.php';
+require_once 'Rating.php';
 
 class Store extends Model{
     private $tableRow = "store";
 
+    private $id;
     private $name;
     private $description;
     private $phone;
@@ -17,65 +20,118 @@ class Store extends Model{
 
     }
 
-    
-    public function setName($name)
+    /**
+     * @return mixed
+     */
+    public function getName()
     {
-        # code...
-    }
-
-        public function setDescription($description)
-    {
-        # code...
-    }
-
-        public function setPhone($phone)
-    {
-        # code...
-    }
-
-        public function setLogo($logo)
-    {
-        # code...
-    }
-
-        public function setCategoryId($category_id)
-    {
-        # code...
-    }
-
-    //-------- Geter -------------
-
-    public function getName(){
         return $this->name;
     }
 
-
-        public function getDescription()
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
     {
-        # code...
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
         return $this->description;
-
     }
 
-        public function getPhone()
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
     {
-        # code...
+        $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhone()
+    {
         return $this->phone;
-
     }
 
-        public function getLogo()
+    /**
+     * @param mixed $phone
+     */
+    public function setPhone($phone)
     {
-        # code...
+        $this->phone = $phone;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLogo()
+    {
         return $this->logo;
-
     }
 
-        public function getCategoryId()
+    /**
+     * @param mixed $logo
+     */
+    public function setLogo($logo)
     {
-        # code...
+        $this->logo = $logo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoryId()
+    {
         return $this->category_id;
+    }
+
+    /**
+     * @param mixed $category_id
+     */
+    public function setCategoryId($category_id)
+    {
+        $this->category_id = $category_id;
+    }
+
+    public  function getRating(){
+        $rating = new Rating();
+        $data = $rating->selectForigen('stor_id',$this->id)->get();
+
+        $sumLike = 0;
+
+        foreach ($data as $item){
+            if($item['like'] == 1){
+                $sumLike += 1;
+            }
+        }
+
+        return $sumLike."/".count($data);
+
 
     }
+
     
 }

@@ -1,15 +1,23 @@
+<?php
+include "../partial/headar.php";
+require_once '../controller/StoreController.php';
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
-<?php
-include "partial/headar.php";
-?>
+
 
 <body class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern"
   data-col="2-columns">
   <!-- fixed-top-->
   <?php
-  include "partial/nav.php";
-  include "partial/sidepar.php";
+  include "../partial/nav.php";
+  include "../partial/sidepar.php";
   ?>
 
   <div class="app-content content">
@@ -485,7 +493,7 @@ include "partial/headar.php";
   </div>
   <!-- ////////////////////////////////////////////////////////////////////////////-->
 <?php
-include "partial/footer.php";
+include "../partial/footer.php";
 ?>
  
 </body>

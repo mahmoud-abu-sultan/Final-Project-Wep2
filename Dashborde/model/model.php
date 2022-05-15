@@ -126,7 +126,7 @@ class Model {
         }
         $sql = "insert into ".Model::$table . " (".$col.") values (".substr($resultVal,0,strlen($resultVal) - 1 ).")";
         $result = mysqli_query(Model::$conn,$sql);
-        echo $sql;
+//        echo $sql;
         return boolval($result);
     }
 

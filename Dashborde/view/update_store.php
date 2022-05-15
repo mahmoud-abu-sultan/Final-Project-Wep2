@@ -5,6 +5,16 @@ require_once '../model/Store.php';
 $errors = [];
 $success = false;
 
+if($_SERVER['REQUEST_METHOD'] == 'GET'){
+    if(!empty($_GET['id'])){
+        $categoryId = $_GET['id'];
+        $dataCategory = (new StoreController())->show($categoryId);
+
+
+    }else{
+        header('Location:show_store.php');
+    }
+}
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
@@ -33,20 +43,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $store->setPhone($phone_number);
         $store->setCategoryId($category_id);
         $store->setLogo($file);
-
+        $categoryId = $_GET['id'];
         $storeController = new StoreController();
-        $isSaved = $storeController->store($store);
+        $isSaved = $storeController->update($categoryId,$store);
 
         if ($isSaved) {
             # code...
             echo "isSaved";
 
             $success = true;
-//            header('Location:show_store.php');
+            header('Location:show_store.php');
         } else {
             # code...
             echo "errors";
-
             $errors['general_error'] = "Some Error !";
         }
     }
@@ -104,7 +113,7 @@ include "../partial/top_temp.php";
                                             }
                                             ?>
 
-                                            <form class="form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
+                                            <form class="form" action="<?php echo $_SERVER['PHP_SELF'] ?>?id=<?php echo $categoryId?>" method="post" enctype="multipart/form-data">
                                                 <div class="form-body">
                                                     <h4 class="form-section"><i class="ft-home"></i>Add Store
                                                     </h4>
@@ -113,7 +122,7 @@ include "../partial/top_temp.php";
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="name"> Name </label>
-                                                                <input type="text" id="name_ar" class="form-control" placeholder="Enter Name Of Store" name="name">
+                                                                <input type="text" id="name_ar" class="form-control" placeholder="Enter Name Of Store" name="name" value="<?php echo $dataCategory->getName() ?>">
                                                                 <span class="text-danger errors">
                                                                     <?php
                                                                     if (isset($errors['name'])) {
@@ -127,7 +136,7 @@ include "../partial/top_temp.php";
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="name"> descreption </label>
-                                                                <input type="text" id="descreption" class="form-control" placeholder="Enter descreption Of Store" name="descreption">
+                                                                <input type="text" id="descreption" class="form-control" placeholder="Enter descreption Of Store" name="descreption" value="<?php echo $dataCategory->getDescription() ?>">
                                                                 <span class="text-danger errors">
                                                                     <?php
                                                                     if (isset($errors['descreption'])) {
@@ -145,7 +154,7 @@ include "../partial/top_temp.php";
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="name"> phone_number </label>
-                                                                <input type="text" id="phone_number" class="form-control" placeholder="phone number" name="phone_number">
+                                                                <input type="text" id="phone_number" class="form-control" placeholder="phone number" name="phone_number" value="<?php echo $dataCategory->getPhone() ?>">
                                                                 <span class="text-danger errors">
                                                                     <?php
                                                                     if (isset($errors['phone_number'])) {
@@ -167,8 +176,12 @@ include "../partial/top_temp.php";
                                                                     $category = new CategoryController();
                                                                     $data = $category->index();
                                                                     foreach ($data as $item){
+                                                                        if($item->getId() == $dataCategory->getCategoryId()){
+                                                                            echo "<option value='".$item->getId()."' selected>".$item->getName()."</option>";
 
-                                                                        echo "<option value='".$item->getId()."'>".$item->getName()."</option>";
+                                                                        }else{
+                                                                            echo "<option value='".$item->getId()."' >".$item->getName()."</option>";
+                                                                        }
                                                                     }
 
                                                                     ?>
@@ -186,6 +199,7 @@ include "../partial/top_temp.php";
                                                         <!-- --- -->
                                                         <div class="col-md-6">
                                                             <div class="form-group">
+                                                                <img src="..<?php echo $dataCategory->getLogo()?> " width="50" height="50">
                                                                 <label for="name"> Image </label>
                                                                 <input type="file" class="form-control" name="image">
                                                                 <span class="text-danger errors">
