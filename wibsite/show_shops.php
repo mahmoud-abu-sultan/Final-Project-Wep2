@@ -1,7 +1,7 @@
 <?php
 include '../Dashborde/DB_connection.php';
 $categoriy_id = $_GET['categoriy_id'];
-$query1 = "SELECT * FROM product WHERE category_id =" . $categoriy_id;
+$query1 = "SELECT * FROM shops WHERE category_id =" . $categoriy_id;
 $result1 = mysqli_query($connection, $query1);
 ?>
 
