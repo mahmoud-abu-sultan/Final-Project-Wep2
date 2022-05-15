@@ -1,4 +1,5 @@
 <?php 
+require_once '../model/Model.php';
 
 class User extends Model {
 
@@ -6,7 +7,12 @@ class User extends Model {
     private $name;
     private $email;
     private $password;
+    private $tableRow = "users";
 
+    public function __construct()
+    {
+        new Model($this->tableRow);
+    }
     public function setName($name)
     {
         # code...
@@ -28,25 +34,26 @@ class User extends Model {
         public function getName()
     {
         # code...
+
+        return $this->name;
     }
 
         public function getEmail()
     {
         # code...
+        return $this->email;
+
     }
 
         public function getPassword()
     {
         # code...
+        return $this->password;
+
     }
     
 
-    private $tableRow = "users";
 
-    public function __construct()
-    {
-        new Model($this->tableRow);
-    }
 
 
 }
