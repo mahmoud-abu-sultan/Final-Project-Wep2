@@ -2,33 +2,30 @@
 require_once 'Controller.php';
 class StoreController extends Controller{
 
-    public function chechRoute($m, $id = null)
-    {
-        // TODO: Implement chechRoute() method.
-    }
 
     public function index()
     {
-        // TODO: Implement index() method.
+        // Get And Show all data
     }
 
     public function show($id)
     {
-        // TODO: Implement show() method.
+        // Get And Show data where is id = $id
     }
 
     public function store()
     {
-        // TODO: Implement store() method.
+        // Insert Data on data base
+
     }
 
     public function update($id)
     {
-        // TODO: Implement update() method.
+        // Update data on database where id = $id
     }
 
     public function delete($id)
     {
-        // TODO: Implement delete() method.
+        // Delete record where id = $id
     }
 }

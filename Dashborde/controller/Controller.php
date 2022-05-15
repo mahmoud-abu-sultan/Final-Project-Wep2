@@ -3,7 +3,6 @@
 abstract Class Controller
 {
 
-    abstract public function chechRoute($m, $id = null);
 
     abstract public function index();
 
