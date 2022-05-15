@@ -1,6 +1,6 @@
 <?php 
 
-require_once '../model/Model.php';
+require_once 'Model.php';
 
 class Admin extends Model{
     private $tableRow = "admins";
@@ -53,17 +53,17 @@ class Admin extends Model{
     /**
      * @return mixed
      */
-    public function getPassword()
+    public function getPasswordAdmin()
     {
         return $this->password_admin;
     }
 
     /**
-     * @param mixed $password
+     * @param mixed $password_admin
      */
-    public function setPassword($password)
+    public function setPasswordAdmin($password_admin)
     {
-        $this->password = $password;
+        $this->password_admin = $password_admin;
     }
 
     /**
@@ -113,6 +113,7 @@ class Admin extends Model{
     {
         $this->description = $description;
     }
+
 
 
 

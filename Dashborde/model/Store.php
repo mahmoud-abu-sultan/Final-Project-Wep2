@@ -1,5 +1,6 @@
-<?php 
-require_once '../model/Model.php';
+<?php
+require_once 'Model.php';
+
 class Store extends Model{
     private $tableRow = "store";
 

@@ -1,57 +1,70 @@
-<?php 
-require_once '../model/Model.php';
+<?php
+require_once 'Model.php';
+
 
 class User extends Model {
 
     // Attrbiute from database
     private $name;
     private $email;
-    private $password;
+    private $password_user;
     private $tableRow = "users";
 
     public function __construct()
     {
         new Model($this->tableRow);
     }
-    public function setName($name)
+
+    /**
+     * @return mixed
+     */
+    public function getName()
     {
-        # code...
-    }
-
-        public function setEmail($email)
-    {
-        # code...
-    }
-
-        public function setPassword($password)
-    {
-        # code...
-    }
-
-    //- ------- Geter
-
-
-        public function getName()
-    {
-        # code...
-
         return $this->name;
     }
 
-        public function getEmail()
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
     {
-        # code...
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
         return $this->email;
-
     }
 
-        public function getPassword()
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
     {
-        # code...
-        return $this->password;
-
+        $this->email = $email;
     }
-    
+
+    /**
+     * @return mixed
+     */
+    public function getPasswordUser()
+    {
+        return $this->password_user;
+    }
+
+    /**
+     * @param mixed $password_user
+     */
+    public function setPasswordUser($password_user)
+    {
+        $this->password_user = $password_user;
+    }
+
+
+
 
 
 
