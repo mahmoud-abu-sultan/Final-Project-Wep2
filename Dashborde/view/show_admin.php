@@ -41,18 +41,19 @@ include "../partial/top_temp.php";
                                         <tbody>
                                         <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
                                         <?php
-                                        require_once '../controller/AdminController.php.php';
+                                        require_once '../controller/AdminController.php';
                                         $admin = new AdminController();
                                         $data = $admin->index();
                                         $index = 1;
+                                        $status = "inActive";
 
                                         foreach ($data as $key => $item){
-
+                                            if($item->getStatus() == 1){$status = "Active";}
                                             echo "<tr>".
                                                     "<td>".$index++."</td>".
                                                     "<td>".$item->getName()."</td>".
                                                     "<td>".$item->getDescription()."</td>".
-                                                    "<td>".$item->getStatus()."</td>".
+                                                    "<td>".$status."</td>".
                                                     "<td>". "
 
                                                     <a href='profile.php?id=1' class='btn btn-outline-primary  box-shadow-3 mr-1 mb-1'>show
