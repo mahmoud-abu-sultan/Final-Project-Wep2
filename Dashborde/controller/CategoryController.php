@@ -25,20 +25,56 @@ class CategoryController extends Controller{
     public function show($id)
     {
         // TODO: Implement show() method.
+        $category = new Category();
+        $data = $category->select($id)->get();
+        $category->setId($data[0]['id']);
+        $category->setName($data[0]['name']);
+        $category->setDescription($data[0]['description']);
+
+        return $category;
     }
 
-    public function store()
+    public function store(Category $data = null)
     {
         // TODO: Implement store() method.
+        $status = false;
+        if($data != null){
+            $category = new Category();
+            $name = $data->getName();
+            $description = $data->getDescription();
+            $isSaved = $category->insert("name,description","$name,$description");
+            if($isSaved){
+                $status = true;
+            }
+        }else {
+            throw new Exception("Data is required");
+        }
+        return $status;
     }
 
-    public function update($id)
+    public function update($id,$data = null)
     {
         // TODO: Implement update() method.
+        $status = false;
+        if($data != null){
+            $category = new Category();
+            $name = $data->getName();
+            $description = $data->getDescription();
+            $isSaved = $category->update("name = '$name' , description = '$description'",$id);
+            if($isSaved){
+                $status = true;
+            }
+        }else {
+            throw new Exception("Data is required");
+        }
+        return $status;
     }
 
     public function delete($id)
     {
         // TODO: Implement delete() method.
+        $category = new Category();
+        $isDeleted = $category->delete($id);
+        return (bool) $isDeleted;
     }
 }

@@ -5,11 +5,28 @@ require_once 'Model.php';
 class Admin extends Model{
     private $tableRow = "admins";
     //name email password status title description
+    private $id;
     private $name;
     private $email;
     private $password_admin;
     private $status;
     private $title;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
     private $description;
 
      public function __construct()

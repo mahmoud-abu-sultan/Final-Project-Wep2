@@ -1,5 +1,6 @@
 <?php
-include_once "DB_connection.php";
+require_once '../controller/CategoryController.php';
+require_once '../model/Category.php';
 $errors = [];
 $success = false;
 
@@ -17,34 +18,29 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   if (count($errors) > 0) {
     $errors['general_error'] = "Please Fix All Error -_-";
   } else {
-    $query = "INSERT INTO category (name, descreption)
-      VALUES('$name', '$descreption')";
 
-    $result = mysqli_query($connection, $query);
-    if ($result) {
+      $category = new Category();
+      $category->setName($name);
+      $category->setDescription($descreption);
+
+      $categoryController = new CategoryController();
+      $isSave = $categoryController->store($category);
+
+    if ($isSave) {
       # code...
       $errors = [];
       $success = true;
       header('Location:show_category.php');
     } else {
-      $errors['general_error'] = mysqli_error($connection);
+      $errors['general_error'] = "Some Errors !";
     }
   }
 }
 ?>
 <!-- ------------------------------------------------ -->
-<!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="ltr">
 <?php
-include "partial/headar.php";
+include "../partial/top_temp.php";
 ?>
-
-<body class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
-  <!-- fixed-top-->
-  <?php
-  include "partial/nav.php";
-  include "partial/sidepar.php";
-  ?>
 
   <div class="app-content content">
     <div class="content-wrapper">
@@ -126,9 +122,6 @@ include "partial/headar.php";
     </div>
   </div>
   <!-- ////////////////////////////////////////////////////////////////////////////-->
-  <?php
-  include "partial/footer.php";
-  ?>
-</body>
-
-</html>
+<?php
+include "../partial/footer.php";
+?>

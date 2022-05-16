@@ -4,7 +4,8 @@ require_once 'Model.php';
 class Category extends Model{
     private $tableRow = "category";
     private  $id;
-
+    private  $name;
+    private $description;
     /**
      * @return mixed
      */
@@ -20,8 +21,7 @@ class Category extends Model{
     {
         $this->id = $id;
     }
-    private  $name;
-    private $description;
+
     public function __construct()
     {
         new Model($this->tableRow);

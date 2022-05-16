@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="ltr">
 <?php
-include "partial/headar.php";
+require_once '../controller/CategoryController.php';
+require_once '../model/Category.php';
+include "../partial/top_temp.php";
 ?>
-
-<body class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern"
-  data-col="2-columns">
-  <!-- fixed-top-->
-  <?php
-  include "partial/nav.php";
-  include "partial/sidepar.php";
-  ?>
 
   <div class="app-content content">
     <div class="content-wrapper">
@@ -50,27 +42,18 @@ include "partial/headar.php";
                                         <tbody>
   <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
                                             <?php
-                                            include_once "DB_connection.php";
-                                            $query="SELECT * FROM category ORDER BY id DESC";
-                                            $result=mysqli_query($connection,$query);
-                                            if(mysqli_num_rows($result)>0){
-                                                while ($row=mysqli_fetch_assoc($result)) {
+                                                $category = new CategoryController();
+                                                $data = $category->index();
+                                                foreach ($data as $item){
+
                                                     # code...
                                                     echo "<tr>".
-                                                            "<td>". $row['name']. "</td>".
-                                                            "<td>". $row['descreption']. "</td>".
-                                                            "<td>". "<a href='edit_category.php?id=".$row['id']."' class='btn btn-outline-primary  box-shadow-3 mr-1 mb-1'><i
+                                                            "<td>". $item->getName(). "</td>".
+                                                            "<td>". $item->getDescription(). "</td>".
+                                                            "<td>". "<a href='edit_category.php?id=".$item->getId()."' class='btn btn-outline-primary  box-shadow-3 mr-1 mb-1'><i
                                                             class='icon-eye'></i></a>" . "</td>".
-                                                            "<td>". 
-                                                                "<form class='c_form' action='delete_category.php' method='post'>
-                                                                <input type='hidden' name='id' value='".$row['id']."'>
-                                                                        <button type='button' class='btn btn-danger delete_category' id='delete-btn'>
-                                                                             DELETE
-                                                                        </button>
-                                                                </form>" . 
-                                                            "</td>".
+                                                        "<td>". "<a href='delete_category.php?id=".$item->getId()."' class='btn btn-outline-primary  box-shadow-3 mr-1 mb-1'>Delete" . "</td>".
                                                          "</tr>";
-                                                }
                                             }
                                             ?>
                                         </tbody>
@@ -91,22 +74,19 @@ include "partial/headar.php";
       </div>
     </div>
   </div>
-  <!-- ////////////////////////////////////////////////////////////////////////////-->
+<!-- ////////////////////////////////////////////////////////////////////////////-->
+<script>
+    $('.delete_category').click(function (){
+        var result = confirm('Are You Sure !!!');
+        if (result) {
+            $('.c_form').submit();
+        }
+    });
+</script>
+<!-- ////////////////////////////////////////////////////////////////////////////-->
+
+
 <?php
-include "partial/footer.php";
+include "../partial/footer.php";
 ?>
 
-
-
-  <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
-  <script>
-        $('.delete_category').click(function (){
-            var result = confirm('Are You Sure !!!');
-            if (result) {
-                $('.c_form').submit();
-            }
-        });
-</script>
-</body>
-
-</html>

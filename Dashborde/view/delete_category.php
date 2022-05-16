@@ -1,9 +1,16 @@
 <?php
-include_once "DB_connection.php";
-$id = $_POST['id'];
-$query = "DELETE from category WHERE id=$id";
-$result = mysqli_query($connection, $query);
-if ($result) {
-    # code...
-    header('Location:show_category.php');
+require_once '../controller/CategoryController.php';
+if(!empty($_GET['id'])){
+    $id = $_GET['id'];
+
+    $category = new CategoryController();
+    $isDelete = $category->delete($id);
+    if($isDelete){
+        header("Location:show_category.php");
+    }else{
+        die("Error Deleted Store !");
+    }
+
+}else{
+    die("Id Store is required !");
 }
