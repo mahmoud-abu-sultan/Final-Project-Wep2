@@ -31,5 +31,20 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+<style>
+    .header-search form .input {
+        border-radius: 40px 0px 0px 40px;
+    }
+    .shop-img {
+        height: 138px;
+    }
+    .product-rating span {
+        position: relative;
+        z-index: 10;
+        background: #ef243d;
+        color: #fff;
+        border-radius: 10px;
+        padding: 2px 6px;
+    }
+</style>
 </head>
