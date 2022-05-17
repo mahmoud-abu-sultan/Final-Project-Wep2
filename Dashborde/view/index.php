@@ -1,7 +1,5 @@
 <?php
-include "../partial/headar.php";
-require_once '../controller/StoreController.php';
-
+header('Location:show_store.php');
 
 ?>
 
@@ -495,7 +493,7 @@ require_once '../controller/StoreController.php';
 <?php
 include "../partial/footer.php";
 ?>
- 
+
 </body>
 
 </html>

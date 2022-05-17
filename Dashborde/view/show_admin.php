@@ -50,7 +50,14 @@ include "../partial/top_temp.php";
                                                     "<td>".$index++."</td>".
                                                     "<td>".$item->getName()."</td>".
                                                     "<td>".$item->getDescription()."</td>".
-                                                    "<td>".$status."</td>".
+                                                    "<td>".$status."</td>";
+
+                                            if($item->getId() == $_SESSION['userInfo']['id']){
+                                                echo "<td>This You !</td>";
+                                            }else{
+
+
+                                            echo
                                                     "<td>". "
 
                                                     <a href='profile.php?id=1' class='btn btn-outline-primary  box-shadow-3 mr-1 mb-1'>show
@@ -64,6 +71,7 @@ include "../partial/top_temp.php";
                                                     "
                                                     ."</td>".
                                                     "</tr>";
+                                            }
                                         }
                                         ?>
                                         </tbody>

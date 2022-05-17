@@ -90,4 +90,6 @@ class AdminController extends Controller{
         $isDelete = (new Admin())->delete($id);
         return (bool) $isDelete;
     }
+
+
 }

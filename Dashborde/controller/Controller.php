@@ -1,5 +1,6 @@
 <?php
-
+require_once '../controller/Auth.php';
+$auth = (new Auth())->checkAuth();
 abstract Class Controller
 {
 
