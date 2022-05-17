@@ -1,18 +1,18 @@
 <?php
-require_once '../controller/StoreController.php';
-require_once '../model/Store.php';
+require_once '../controller/AdminController.php';
+require_once '../model/Admin.php';
 
 $errors = [];
 $success = false;
 
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
     if(!empty($_GET['id'])){
-        $categoryId = $_GET['id'];
-        $dataCategory = (new StoreController())->show($categoryId);
+        $adminId = $_GET['id'];
+        $dataAdmin = (new AdminController())->show($adminId);
 
 
     }else{
-        header('Location:show_store.php');
+        header('Location:show_admin.php');
     }
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -20,39 +20,61 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $name = $_POST['name'];
     $descreption = $_POST['descreption'];
-    $phone_number = $_POST['phone_number'];
-    $category_id = $_POST['category_id'];
+    $email = $_POST['email'];
+    $title = $_POST['title'];
+    $status = null;
+    if(!empty($_POST['status'])){
+        $status =  1 ;
+    }else{
+        $status =  0;
+    }
+    $password = $_POST['password'];
+    $title = $_POST['title'];
 
     if (empty($_POST["name"])) {
         $errors['name'] = "Name is required";
     }
-    if (empty($_FILES["image"])) {
-        $errors['image'] = "image is required";
+
+    if (empty($_POST["email"])) {
+        $errors['email'] = "email is required";
     }
 
-    if (empty($_POST["phone_number"])) {
-        $errors['phone_number'] = "Phone Number is required";
+    if (empty($_POST["title"])) {
+        $errors['title'] = "title is required";
     }
 
+//    if (empty($_POST["status"])) {
+//        $errors['status'] = "status is required";
+//    }
+
+    if (empty($_POST["password"])) {
+        $errors['password'] = "password is required";
+    }
+
+    if (empty($_POST["title"])) {
+        $errors['title'] = "title is required";
+    }
     //-----------
     if (!count($errors) > 0) {
-        $file = $_FILES['image'];
-        $store = new Store();
-        $store->setName($name);
-        $store->setDescription($descreption);
-        $store->setPhone($phone_number);
-        $store->setCategoryId($category_id);
-        $store->setLogo($file);
-        $categoryId = $_GET['id'];
-        $storeController = new StoreController();
-        $isSaved = $storeController->update($categoryId,$store);
+        $admin = new Admin();
+
+        $admin->setStatus($status);
+        $admin->setName($name);
+        $admin->setEmail($email);
+        $admin->setDescription($descreption);
+        $admin->setPasswordAdmin($password);
+        $admin->setTitle($title);
+
+        $adminId = $_GET['id'];
+        $adminController = new AdminController();
+        $isSaved = $adminController->update($adminId,$admin);
 
         if ($isSaved) {
             # code...
             echo "isSaved";
 
             $success = true;
-            header('Location:show_store.php');
+            header('Location:show_admin.php');
         } else {
             # code...
             echo "errors";
@@ -113,7 +135,7 @@ include "../partial/top_temp.php";
                                             }
                                             ?>
 
-                                            <form class="form" action="<?php echo $_SERVER['PHP_SELF'] ?>?id=<?php echo $categoryId?>" method="post" enctype="multipart/form-data">
+                                            <form class="form" action="<?php echo $_SERVER['PHP_SELF'] ?>?id=<?php echo $adminId?>" method="post" enctype="multipart/form-data">
                                                 <div class="form-body">
                                                     <h4 class="form-section"><i class="ft-home"></i>Add Store
                                                     </h4>
@@ -122,7 +144,7 @@ include "../partial/top_temp.php";
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="name"> Name </label>
-                                                                <input type="text" id="name_ar" class="form-control" placeholder="Enter Name Of Store" name="name" value="<?php echo $dataCategory->getName() ?>">
+                                                                <input type="text" id="name_ar" class="form-control" placeholder="Enter Name Of Store" name="name" value="<?php echo $dataAdmin->getName() ?>">
                                                                 <span class="text-danger errors">
                                                                     <?php
                                                                     if (isset($errors['name'])) {
@@ -136,7 +158,7 @@ include "../partial/top_temp.php";
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="name"> descreption </label>
-                                                                <input type="text" id="descreption" class="form-control" placeholder="Enter descreption Of Store" name="descreption" value="<?php echo $dataCategory->getDescription() ?>">
+                                                                <input type="text" id="descreption" class="form-control" placeholder="Enter descreption Of Store" name="descreption" value="<?php echo $dataAdmin->getDescription() ?>">
                                                                 <span class="text-danger errors">
                                                                     <?php
                                                                     if (isset($errors['descreption'])) {
@@ -153,12 +175,12 @@ include "../partial/top_temp.php";
                                                         <!-- --- -->
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <label for="name"> phone_number </label>
-                                                                <input type="text" id="phone_number" class="form-control" placeholder="phone number" name="phone_number" value="<?php echo $dataCategory->getPhone() ?>">
+                                                                <label for="name"> Title </label>
+                                                                <input type="text" id="title" class="form-control" placeholder="Jop Title" name="title" value="<?php echo $dataAdmin->getTitle() ?>">
                                                                 <span class="text-danger errors">
                                                                     <?php
-                                                                    if (isset($errors['phone_number'])) {
-                                                                        print_r($errors['phone_number']);
+                                                                    if (isset($errors['title'])) {
+                                                                        print_r($errors['title']);
                                                                     }
                                                                     ?>
                                                                 </span>
@@ -169,27 +191,14 @@ include "../partial/top_temp.php";
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="name"> Category </label>
-                                                                <select class="form-control" name="category_id">
-                                                                    <?php
-                                                                    require_once '../controller/CategoryController.php';
-                                                                    $category = new CategoryController();
-                                                                    $data = $category->index();
-                                                                    foreach ($data as $item){
-                                                                        if($item->getId() == $dataCategory->getCategoryId()){
-                                                                            echo "<option value='".$item->getId()."' selected>".$item->getName()."</option>";
+                                                                <label for="name"> Email </label>
 
-                                                                        }else{
-                                                                            echo "<option value='".$item->getId()."' >".$item->getName()."</option>";
-                                                                        }
-                                                                    }
+                                                                <input type="text" id="email" class="form-control" placeholder="Email" name="email" value="<?php echo $dataAdmin->getEmail() ?>">
 
-                                                                    ?>
-                                                                </select>
                                                                 <span class="text-danger errors">
                                                                     <?php
-                                                                    if (isset($errors['category_id'])) {
-                                                                        print_r($errors['category_id']);
+                                                                    if (isset($errors['email'])) {
+                                                                        print_r($errors['email']);
                                                                     }
                                                                     ?>
 
@@ -199,13 +208,13 @@ include "../partial/top_temp.php";
                                                         <!-- --- -->
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <img src="..<?php echo $dataCategory->getLogo()?> " width="50" height="50">
-                                                                <label for="name"> Image </label>
-                                                                <input type="file" class="form-control" name="image">
+                                                                <label for="name"> Password </label>
+                                                                <input type="text" id="password" class="form-control" placeholder="Password" name="password" value="<?php echo $dataAdmin->getPasswordAdmin() ?>">
+
                                                                 <span class="text-danger errors">
                                                                     <?php
-                                                                    if (isset($errors['image'])) {
-                                                                        print_r($errors['image']);
+                                                                    if (isset($errors['password'])) {
+                                                                        print_r($errors['password']);
                                                                     }
                                                                     ?>
                                                                 </span>
@@ -213,16 +222,27 @@ include "../partial/top_temp.php";
                                                         </div>
                                                     </div>
                                                     <!-- ------------------------------------------------ -->
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="name"> Active :  </label>
+                                                            <input type="checkbox" id="status" class="checkbox"  name="status"
+                                                                <?php
+
+                                                                    if($dataAdmin->getStatus()){
+                                                                        echo "checked";
+                                                                    }
+                                                                ?>
+
+                                                            >
+
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                                 </div>
                                         </div>
 
-                                        <section id="chkbox-radio">
-                                            <div class="row">
 
-                                            </div>
-
-                                        </section>
                                         <div class="form-actions">
                                             <button type="button" class="btn btn-warning mr-1" onclick="history.back();">
                                                 <i class="ft-x"></i> Back
