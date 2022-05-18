@@ -122,23 +122,30 @@ class  StoreController extends Controller{
         $user_id = $_SESSION['user']['id'];
         $store = new Store();
         $rating = new Rating();
-        $dataRating = $rating->where("stor_id = $id , users_id = $user_id")->get();
+
         $likes = $rating->selectForigen('stor_id',$id)->count();
         $user = $rating->selectForigen('users_id',$user_id)->count();
+
         if($likes > 0 && $user > 0){
+            $dataRating = $rating->where("stor_id = $id and users_id = $user_id")->get();
+
             // update
             if($dataRating[0]['like'] == 1){
-                $isSave = $rating->update("like = '0',dislike = '1',users_id = '$user_id',stor_id = '$id'");
+                $isSave = $rating->update("`like` = '0',dislike = '1',users_id = '$user_id',stor_id = '$id'",$dataRating[0]['id']);
                 if($isSave)
                     $status = true;
-
+            }else{
+                $isSave = $rating->update("`like` = '1',dislike = '0',users_id = '$user_id',stor_id = '$id'",$dataRating[0]['id']);
+                if($isSave)
+                    $status = true;
             }
         }else{
             // insert
             $like = 1;
-            $isSave = $rating->insert("like,dislike,users_id,stor_id","$like,0,$user_id,$id");
+            $isSave = $rating->insert("`like`,dislike,users_id,stor_id","$like,0,$user_id,$id");
             if($isSave)
                 $status = true;
         }
+        return $status;
     }
 }

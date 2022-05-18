@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2022 at 11:09 AM
+-- Generation Time: May 18, 2022 at 07:57 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.23
 
@@ -43,8 +43,6 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `password`, `status`, `title`, `description`, `token`) VALUES
-(8, 'Ahmad Nahal 2', 'ahmad@gmail.com', '123456', 1, 'HR', 'Humen resource and salary s 800', 'eRtGcTxc*NGaAEwNla63DFX[bg1xRwDcAsTkl8R'),
-(11, 'Quamar Rocha', 'fenixun@mailinator.com', 'Pa$$w0rd!', 1, 'Dolor dolorem eius d', 'Qui qui non nulla en', NULL),
 (12, 'Savannah Strickland', 'xesypiro@mailinator.com', 'Pa$$w0rd!', 1, 'Quo suscipit porro i', 'Amet cumque laudant', NULL),
 (13, 'Nayda Goodman', 'budeg@mailinator.com', 'Pa$$w0rd!', 0, 'Ut facere aut in occ', 'Et commodo aut eius ', NULL);
 
@@ -90,15 +88,9 @@ CREATE TABLE `rating` (
 --
 
 INSERT INTO `rating` (`id`, `like`, `dislike`, `users_id`, `stor_id`) VALUES
-(5, 0, 1, 8, 10),
-(6, 0, 1, 8, 11),
-(7, 1, 0, 8, 12),
-(8, 0, 1, 8, 15),
-(9, 0, 1, 8, 14),
-(10, 0, 1, 8, 13),
-(11, 1, 0, 8, 17),
-(12, 0, 1, 8, 16),
-(13, 0, 1, 8, 18);
+(15, 1, 0, 8, 13),
+(16, 1, 0, 8, 12),
+(17, 1, 0, 8, 17);
 
 -- --------------------------------------------------------
 
@@ -128,7 +120,13 @@ INSERT INTO `store` (`id`, `name`, `description`, `phone`, `logo`, `category_id`
 (15, 'Amir Bishop', 'Ea nihil ea magna ve', '+1 (915) 158-4783', 'media/1652471017full-shot-man-training-gym_23-2149307712.jpg', 17),
 (16, 'Alma Holman', 'Facere aut nihil ali', '+1 (272) 976-7019', 'media/1652471026full-shot-man-training-with-kettlebells-gym_23-2149307709.webp', 17),
 (17, 'Hu Avery', 'Error laboris eos vo', '+1 (578) 838-8374', 'media/1652470957gradient-indonesian-national-sports-day-illustration_52683-65598.jpg', 17),
-(18, 'Cade Floyd', 'Aliquid tempore neq', '+1 (355) 547-3236', 'media/1652470974training-gym-concept-with-kettlebells_23-2149307767.jpg', 17);
+(18, 'Cade Floyd', 'Aliquid tempore neq', '+1 (355) 547-3236', 'media/1652470974training-gym-concept-with-kettlebells_23-2149307767.jpg', 17),
+(19, 'Bryar Malone', 'Minus in accusantium', '+1 (518) 455-1856', 'Array', 16),
+(20, 'Bryar Malone', 'Minus in accusantium', '+1 (518) 455-1856', '../uploder/images/220px-Cristiano-ronaldo-juventus-2019_(cropped).jpg', 16),
+(21, 'Uma Booth', 'Maxime facere dicta ', '+1 (954) 579-7952', '../uploder/images/1652635680E3-LlpQWQAEr3_f-e1623828909549.png', 14),
+(22, 'Brianna Morrow', 'Voluptatem Dolor pl', '+1 (125) 113-8239', 'Brianna Morrowlogo.png', 17),
+(23, 'Brianna Morrow', 'Voluptatem Dolor pl', '+1 (125) 113-8239', '/uploadBrianna Morrowlogo.png', 17),
+(25, 'ahmad', 'Minus proident iure', '+1 (865) 618-8687', '/uploder/images/ahmad471151Image1.jpg', 14);
 
 -- --------------------------------------------------------
 
@@ -203,25 +201,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `store`
 --
 ALTER TABLE `store`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `users`

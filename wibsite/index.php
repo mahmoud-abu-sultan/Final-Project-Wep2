@@ -62,6 +62,23 @@ $stores = (new StoreController())->index();
 		<div class="container">
 			<!-- row -->
 			<div class="row">
+                <?php
+                if(!empty($_SESSION['rating'])){
+                    echo '
+                    <div class="alert alert-success" role="alert">
+                        '.$_SESSION['rating'].'
+                    </div>
+                    ';
+                    $_SESSION['rating'] = null;
+                }elseif (!empty($_SESSION['rating_error'])){
+                    echo '
+                    <div class="alert danger" role="alert">
+                        '.$_SESSION['rating_error'].'
+                    </div>
+                    ';
+                    $_SESSION['rating_error'] = null;
+                }
+                ?>
 
 				<!-- section title -->
 				<div class="col-md-12">
@@ -71,6 +88,7 @@ $stores = (new StoreController())->index();
 					</div>
 				</div>
 				<!-- /section title -->
+
 
 				<!-- Products tab & slick -->
 				<div class="col-md-12">
@@ -99,8 +117,9 @@ $stores = (new StoreController())->index();
                                                         <span>'.$item->getRating().'</span>
                                                     </div>
                                                     <div class="product-btns">
-                                                        <form method="post" action="">
-                                                            <button name="like" class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Like</span></button>
+                                                        <form method="get" action="add_rating.php">
+                                                        <input type="hidden" name="id" value="'.$item->getId().'">
+                                                            <button  type="submit" class="add-to-wishlist " ><i class="fa fa-heart-o"></i><span class="tooltipp">Like</span></button>
                                                         </form>
                                                         <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
                                                         <button class="quick-view" onclick="window.location.href = \'show_shops.php?id='.$item->getId().'\' "><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>

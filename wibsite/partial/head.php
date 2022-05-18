@@ -46,5 +46,40 @@
         border-radius: 10px;
         padding: 2px 6px;
     }
+    span.tooltipp {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -15px);
+        -ms-transform: translate(-50%, -15px);
+        transform: translate(-50%, -15px);
+        width: 150px;
+        padding: 10px;
+        font-size: 12px;
+        line-height: 10px;
+        background: #1e1f29;
+        color: #FFF;
+        text-transform: uppercase;
+        z-index: 10;
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transition: 0.2s all;
+        transition: 0.2s all;
+    }
+    button.add-to-wishlist {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        background: transparent;
+        border: none;
+        -webkit-transition: 0.2s all;
+        transition: 0.2s all;
+    }
+    button.add-to-wishlist.active {
+        background-color: #E4E7ED;
+        color: #D10024;
+        border-radius: 50%;
+    }
 </style>
 </head>
