@@ -1,24 +1,117 @@
 <?php
-include '../Dashborde/DB_connection.php';
-$categoriy_id = $_GET['categoriy_id'];
-$query1 = "SELECT * FROM shops WHERE category_id =" . $categoriy_id;
-$result1 = mysqli_query($connection, $query1);
+require_once 'controller/StoreController.php';
+require_once 'model/Store.php';
+include_once 'partial/top_temp.php';
+$dataAllStore = (new StoreController())->index();
+
+if(!empty($_GET['id'])){
+    $id = $_GET['id'];
+    $isData = (new Store())->select($id)->count();
+    if($isData>0){
+        $dataStore = (new StoreController())->show($id);
+    }else{
+        $error['no_data'] = "No Result 404";
+    }
+}else{
+    die("Id Is Requierd");
+
+}
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+    <div class="section">
+        <a>
+            <!-- container -->
+        </a><div class="container"><a>
+                <!-- row -->
+            </a><div class="row"><a>
+                    <!-- Product main img -->
+                    <div class="col-md-5 col-md-push-2">
+                        <div id="product-main-img" class="slick-initialized slick-slider"><button class="slick-prev slick-arrow" aria-label="Previous" type="button" style="display: block;">Previous</button>
+                            <div class="slick-list draggable">
+                                <div class="slick-track" style="opacity: 1; width: 1832px;">
+                                    <div class="product-preview slick-slide" data-slick-index="0" aria-hidden="true" tabindex="-1" style="width: 458px; position: relative; left: 0px; top: 0px; z-index: 998; opacity: 0; overflow: hidden; transition: opacity 300ms ease 0s;">
+                                        <img src="./img/product01.png" alt="">
+                                        <img role="presentation" src="file:///C:/Users/DELL/Desktop/electro/img/product01.png" class="zoomImg" style="position: absolute; top: -118.003px; left: -1.98428px; opacity: 0; width: 600px; height: 600px; border: none; max-width: none; max-height: none;">
+                                    </div>
+                                    <div class="product-preview slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1" style="width: 458px; position: relative; left: -458px; top: 0px; z-index: 998; opacity: 0; overflow: hidden; transition: opacity 300ms ease 0s;">
+                                        <img src="./img/product03.png" alt="">
+                                        <img role="presentation" src="file:///C:/Users/DELL/Desktop/electro/img/product03.png" class="zoomImg" style="position: absolute; top: 0px; left: 0px; opacity: 0; width: 600px; height: 600px; border: none; max-width: none; max-height: none;">
+                                    </div>
 
-<!-- --- -->
-<?php include_once 'partial/head.php'; ?>
-<!-- --- -->
+                                    <div class="product-preview slick-slide slick-current slick-active" data-slick-index="2" aria-hidden="false" tabindex="0" style="width: 458px; position: relative; left: -916px; top: 0px; z-index: 999; opacity: 1; overflow: hidden;">
+                                        <img src="<?php echo '../Dashborde'.$dataStore->getLogo()?>" alt="">
+                                        <img role="presentation" src="<?php echo '../Dashborde'.$dataStore->getLogo()?>" class="zoomImg" style="position: absolute; top: -55.3738px; left: -137.783px; opacity: 0; width: 600px; height: 600px; border: none; max-width: none; max-height: none;">
+                                    </div>
 
-<body>
-    <?php
-    include_once 'partial/header.php';
-    include_once 'partial/nav.php';
-    ?>
+                                    <div class="product-preview slick-slide" data-slick-index="3" aria-hidden="true" tabindex="-1" style="width: 458px; position: relative; left: -1374px; top: 0px; z-index: 998; opacity: 0; overflow: hidden;">
+                                        <img src="./img/product08.png" alt="">
+                                        <img role="presentation" src="file:///C:/Users/DELL/Desktop/electro/img/product08.png" class="zoomImg" style="position: absolute; top: 0px; left: 0px; opacity: 0; width: 600px; height: 600px; border: none; max-width: none; max-height: none;"></div>
+                                </div>
+                            </div>
 
-    <!-- Section -->
+
+
+
+
+
+                            <button class="slick-next slick-arrow" aria-label="Next" type="button" style="display: block;">Next</button></div>
+                    </div>
+                    <!-- /Product main img -->
+
+                    <!-- Product thumb imgs -->
+                    <div class="col-md-2  col-md-pull-5">
+                        <div id="product-imgs" class="slick-initialized slick-slider slick-vertical">
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                    <!-- /Product thumb imgs -->
+
+                    <!-- Product details -->
+                </a><div class="col-md-5"><a>
+                    </a><div class="product-details"><a>
+                            <h2 class="product-name"><?php echo $dataStore->getName()?></h2>
+                        </a><div><a class="review-link" href="#"><?php echo $dataStore->getRating()?> Review(s)</a>
+                        </div>
+
+                        <p><?php echo $dataStore->getDescription()?></p>
+
+
+
+
+
+
+
+
+
+                        <ul class="product-links">
+                            <li>Share:</li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                        </ul>
+
+                    </div>
+                </div>
+                <!-- /Product details -->
+
+                <!-- Product tab -->
+
+                <!-- /product tab -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+
+
+
     <div class="section">
         <!-- container -->
         <div class="container">
@@ -31,89 +124,44 @@ $result1 = mysqli_query($connection, $query1);
                     </div>
                 </div>
 
+
                 <?php
-                while ($product = mysqli_fetch_assoc($result1)) {
-                    $product_id = $product['id'];
-                    $query2 = "SELECT * FROM product_file WHERE product_id=$product_id limit 1";
-                    $result2 = mysqli_query($connection, $query2);
-                    $file = mysqli_fetch_assoc($result2);
+
+                foreach ($dataAllStore as $item){
                     echo '
+                    
+                    
+                    
+                    
                     <div class="col-md-3 col-xs-6">
-                    <div class="product">
-                        <div class="product-img">
-                            <img src="http://localhost/IUG/Project/Dashborde/uploder/images/'.$file['image'].'" alt="">
-                            <div class="product-label">
-                                <span class="sale">-30%</span>
-                            </div>
-                        </div>
-                        <div class="product-body">
-                            <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">' . $product["name"] . '</a></h3>
-                            <h4 class="product-price">' . $product["price"] . '<del class="product-old-price">' . $product["first_price"] . '</del></h4>
-                            <div class="product-rating">
-                            </div>
-                            <div class="product-btns">
-                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                            </div>
-                        </div>
-                        <div class="add-to-cart">
-                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                        </div>
-                    </div>
-                </div>
+						<div class="product">
+							<div class="product-img">
+								<img src="../Dashborde'.$item->getLogo().'" alt="">
+								
+							</div>
+							<div class="product-body">
+								<h3 class="product-name"><a href="show_shops.php?id='.$item->getId().'">'.$item->getName().'</a></h3>
+                                <p class="product-category">'.$item->getDescription().'</p>
+
+								
+							</div>
+							
+						</div>
+					</div>
+                    
+                    
+                    
                     ';
                 }
                 ?>
 
-                <div class="clearfix visible-sm visible-xs"></div>
 
             </div>
             <!-- /row -->
         </div>
         <!-- /container -->
     </div>
-    <!-- /Section -->
+   <?php
+include_once 'partial/bottom_temp.php';
 
-    <!-- NEWSLETTER -->
-    <div id="newsletter" class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="newsletter">
-                        <p>Sign Up for the <strong>NEWSLETTER</strong></p>
-                        <form>
-                            <input class="input" type="email" placeholder="Enter Your Email">
-                            <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-                        </form>
-                        <ul class="newsletter-follow">
-                            <li>
-                                <a href="login.php"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </div>
-    <!-- /NEWSLETTER -->
-
-    <?php include_once 'partial/footr.php'; ?>
-
-</body>
-
-</html>
+?>

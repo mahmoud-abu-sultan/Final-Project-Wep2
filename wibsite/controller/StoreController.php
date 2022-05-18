@@ -109,7 +109,8 @@ class  StoreController extends Controller{
     {
         // Delete record where id = $id
         $store = new Store();
-        $isDeleted = $store->delete($id);
+
+            $isDeleted = $store->delete($id);
         if($isDeleted){
             return true;
         }else{
@@ -147,5 +148,24 @@ class  StoreController extends Controller{
                 $status = true;
         }
         return $status;
+    }
+
+
+    public function search($name){
+        $dataStore = [];
+        $store = new Store();
+        $dataSearches = $store->where("name like '%$name%' or description like '%$name%'")->get();
+        foreach ($dataSearches as $item) {
+            $store_data = new Store();
+            $store_data->setId($item['id']);
+            $store_data->setName($item['name']);
+            $store_data->setDescription($item['description']);
+            $store_data->setPhone($item['phone']);
+            $store_data->setLogo($item['logo']);
+            $store_data->setCategoryId($item['category_id']);
+            array_push($dataStore,$store_data);
+        }
+
+        return $dataStore;
     }
 }

@@ -1,60 +1,21 @@
 <?php
 require_once 'controller/StoreController.php';
 include_once 'partial/top_temp.php';
-require_once 'controller/CategoryController.php';
 
 
-$like = null;
-$dislike = null;
-if(isset($_POST['like'])){
-    $like = 1;
-    $dislike = 0;
-}
-$data = (new CategoryController())->index();
-$stores = (new StoreController())->index();
-    if(!(count($data) > 0)){
-        $msg['no_data'] = "No Result";
-    }
+if(!empty($_GET['s'])){
+    $name = $_GET['s'];
+    $stores = (new StoreController())->search($name);
+
     if(!(count($stores) > 0)){
         $msg['no_stores'] = "No Result";
     }
+}else{
+    die("<h1>Name is requierd</h1>");
+}
 
 
 ?>
-	<!-- SECTION -->
-	<div class="section">
-		<!-- container -->
-		<div class="container">
-			<!-- row -->
-			<div class="row">
-                <?php
-
-                foreach ($data as $item) {
-
-                    echo '
-                    <div class="col-md-4 col-xs-6">
-                <div class="shop">
-                    <div class="shop-img">
-                        
-                    </div>
-                    <div class="shop-body">
-                        <h3>'.$item->getName().'</h3>
-                        <a href="show_category.php?id='.$item->getId().'" class="cta-btn">Show now <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-            </div>
-                
-                ';
-                }
-                ?>
-
-
-			</div>
-			<!-- /row -->
-		</div>
-		<!-- /container -->
-	</div>
-	<!-- /SECTION -->
 
 	<!-- SECTION -->
 	<div class="section">
@@ -62,23 +23,7 @@ $stores = (new StoreController())->index();
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-                <?php
-                if(!empty($_SESSION['rating'])){
-                    echo '
-                    <div class="alert alert-success" role="alert">
-                        '.$_SESSION['rating'].'
-                    </div>
-                    ';
-                    $_SESSION['rating'] = null;
-                }elseif (!empty($_SESSION['rating_error'])){
-                    echo '
-                    <div class="alert danger" role="alert">
-                        '.$_SESSION['rating_error'].'
-                    </div>
-                    ';
-                    $_SESSION['rating_error'] = null;
-                }
-                ?>
+
 
 				<!-- section title -->
 				<div class="col-md-12">

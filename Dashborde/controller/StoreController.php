@@ -108,12 +108,15 @@ class  StoreController extends Controller{
     public function delete($id)
     {
         // Delete record where id = $id
-        $store = new Store();
-        $isDeleted = $store->delete($id);
-        if($isDeleted){
-            return true;
-        }else{
-            return false;
+        $rating = (new Rating())->deleteWhere('stor_id = '.$id);
+        if($rating){
+            $store = new Store();
+            $isDeleted = $store->delete($id);
+            if($isDeleted){
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 }

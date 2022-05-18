@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2022 at 07:57 PM
+-- Generation Time: May 18, 2022 at 10:42 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.23
 
@@ -43,6 +43,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `password`, `status`, `title`, `description`, `token`) VALUES
+(1, 'Admin', 'admin@admin.com', 'password', 1, 'Super Admin', 'Super Admin', NULL),
 (12, 'Savannah Strickland', 'xesypiro@mailinator.com', 'Pa$$w0rd!', 1, 'Quo suscipit porro i', 'Amet cumque laudant', NULL),
 (13, 'Nayda Goodman', 'budeg@mailinator.com', 'Pa$$w0rd!', 0, 'Ut facere aut in occ', 'Et commodo aut eius ', NULL);
 
@@ -88,9 +89,7 @@ CREATE TABLE `rating` (
 --
 
 INSERT INTO `rating` (`id`, `like`, `dislike`, `users_id`, `stor_id`) VALUES
-(15, 1, 0, 8, 13),
-(16, 1, 0, 8, 12),
-(17, 1, 0, 8, 17);
+(20, 1, 0, 8, 28);
 
 -- --------------------------------------------------------
 
@@ -112,21 +111,10 @@ CREATE TABLE `store` (
 --
 
 INSERT INTO `store` (`id`, `name`, `description`, `phone`, `logo`, `category_id`) VALUES
-(10, 'KSA Store', 'KSA Store For All Sport Prudacts', '0592146000', 'media/1652470627gradient-indonesian-national-sports-day-illustration_52683-65598.jpg', 16),
-(11, 'GAZA electronics', 'Gaza electronics for all electronics devices', '8452301', 'media/1652470751headphones-mouse-orange-background_23-2148182104 (1).jpg', 13),
-(12, 'Dahlia Duncan', 'Repellendus Nemo qu', '+1 (895) 343-3696', 'media/1652470816electronic-devices-set-usb-hard-drive-player-web-camera-joystic-computer_1284-44163.webp', 13),
-(13, 'Salvador Knight', 'Ut perspiciatis sim', '+1 (363) 755-1693', 'media/1652470847home-security-isometric-card-set_1284-9878.webp', 13),
-(14, 'Hannah Burton', 'Est voluptas sed nat', '+1 (618) 843-4897', 'media/1652470853security-camera-icon_1284-4747.webp', 13),
-(15, 'Amir Bishop', 'Ea nihil ea magna ve', '+1 (915) 158-4783', 'media/1652471017full-shot-man-training-gym_23-2149307712.jpg', 17),
-(16, 'Alma Holman', 'Facere aut nihil ali', '+1 (272) 976-7019', 'media/1652471026full-shot-man-training-with-kettlebells-gym_23-2149307709.webp', 17),
-(17, 'Hu Avery', 'Error laboris eos vo', '+1 (578) 838-8374', 'media/1652470957gradient-indonesian-national-sports-day-illustration_52683-65598.jpg', 17),
-(18, 'Cade Floyd', 'Aliquid tempore neq', '+1 (355) 547-3236', 'media/1652470974training-gym-concept-with-kettlebells_23-2149307767.jpg', 17),
-(19, 'Bryar Malone', 'Minus in accusantium', '+1 (518) 455-1856', 'Array', 16),
-(20, 'Bryar Malone', 'Minus in accusantium', '+1 (518) 455-1856', '../uploder/images/220px-Cristiano-ronaldo-juventus-2019_(cropped).jpg', 16),
-(21, 'Uma Booth', 'Maxime facere dicta ', '+1 (954) 579-7952', '../uploder/images/1652635680E3-LlpQWQAEr3_f-e1623828909549.png', 14),
-(22, 'Brianna Morrow', 'Voluptatem Dolor pl', '+1 (125) 113-8239', 'Brianna Morrowlogo.png', 17),
-(23, 'Brianna Morrow', 'Voluptatem Dolor pl', '+1 (125) 113-8239', '/uploadBrianna Morrowlogo.png', 17),
-(25, 'ahmad', 'Minus proident iure', '+1 (865) 618-8687', '/uploder/images/ahmad471151Image1.jpg', 14);
+(26, 'Bruno Wise', 'Non ad expedita fugi', '+1 (657) 882-3506', '/uploder/images/Bruno WiseEuYPry3XEAUHmEr-e1613513834736.jpg', 16),
+(27, 'Diana Hines', 'Sequi mollit anim ac', '+1 (989) 584-4866', '/uploder/images/Diana Hinesdesignssport_03.jpg', 14),
+(28, 'Jaden Bass', 'Voluptate sequi sint', '+1 (301) 279-2102', '/uploder/images/Jaden Bassphoto-1588421357574-87938a86fa28.jpg', 14),
+(29, 'Karina Mcgee', 'Incidunt eligendi a', '+1 (308) 776-5181', '/uploder/images/Karina Mcgee1-1420248.jpg', 15);
 
 -- --------------------------------------------------------
 
@@ -150,7 +138,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `token`) VALUES
 (1, 'Ahmad', 'Ahmad@ahmad.com', '234567', 'eRt4gG6iNXVUWx/DThq[nb8K3L*VUQlxfsTkl8R'),
 (2, 'Omer', 'Omer@agm.com3456789', '345678', NULL),
 (7, 'Dora', 'dora@name.com', '123456', 'eRtw8rB4CwS28bvUhaVl[gwVxZurAaRNDsTkl8R'),
-(8, 'ahmad', 'ahmad1@gmail.com', '123456', 'eRt[8hhh/oUSv3GXDrNBXh6CcYgwTMY[OsTkl8R');
+(8, 'ahmad', 'ahmad1@gmail.com', '123456', 'eRt[8hhh/oUSv3GXDrNBXh6CcYgwTMY[OsTkl8R'),
+(9, 'User', 'user@user.com', 'password', NULL);
 
 --
 -- Indexes for dumped tables
@@ -213,19 +202,19 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `store`
 --
 ALTER TABLE `store`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

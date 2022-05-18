@@ -6,7 +6,7 @@ if(!empty($_GET['id'])){
     $store = new StoreController();
     $isDelete = $store->delete($id);
     if($isDelete){
-        header("Location:show_store.php");
+//        header("Location:show_store.php");
     }else{
         die("Error Deleted Store !");
     }

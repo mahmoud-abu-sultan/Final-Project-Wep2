@@ -185,7 +185,7 @@ class Model {
      */
     public function deleteWhere($cond){
         $sql = "delete from ".Model::$table . " where $cond";
-        // print_r(json_encode(['sql'=>$sql]));
+         print_r(json_encode(['sql'=>$sql]));
         $result = mysqli_query(Model::$conn,$sql);
         return boolval($result);
     }

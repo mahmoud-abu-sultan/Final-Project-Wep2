@@ -39,9 +39,9 @@
 	                <!-- SEARCH BAR -->
 	                <div class="col-md-6">
 	                    <div class="header-search">
-	                        <form>
+	                        <form action="search.php" method="get">
 
-	                            <input class="input" placeholder="Search here">
+	                            <input class="input" placeholder="Search here" type="text" name="s">
 	                            <button class="search-btn">Search</button>
 	                        </form>
 	                    </div>

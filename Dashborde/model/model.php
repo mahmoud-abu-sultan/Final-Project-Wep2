@@ -172,7 +172,7 @@ class Model {
      */
     public function delete($id){
         $sql = "delete from ".Model::$table . " where id = ".$id;
-        // print_r(json_encode(['sql'=>$sql]));
+//         echo $sql;
         $result = mysqli_query(Model::$conn,$sql);
         return boolval($result);
     }
