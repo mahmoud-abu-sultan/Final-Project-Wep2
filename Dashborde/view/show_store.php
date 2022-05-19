@@ -55,9 +55,9 @@ include "../partial/top_temp.php";
                                                     "<td>".$item->getRating()."</td>".
                                                     "<td>". "
 
-                                                    <a href='show.php?id=1' class='btn btn-outline-primary  box-shadow-3 mr-1 mb-1'>show
+                                                    <a href='../../wibsite/show_shops.php?id=".$item->getId()."' class='btn btn-outline-primary  box-shadow-3 mr-1 mb-1'>show
                                                     </a>
-                                                    
+                                                    "."
                                                     <a href='update_store.php?id=".$item->getId()."' class='btn btn-outline-primary  box-shadow-3 mr-1 mb-1'>Edit
                                                     </a>
                                                     

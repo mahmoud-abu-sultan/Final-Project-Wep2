@@ -14,28 +14,12 @@
             </ul>
           </li>
           <!-- --- -->
-          <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title" data-i18n="nav.templates.main">Category</span>
-              <span class="badge badge badge-info badge-pill float-right mr-2">
-                  <?php
-                  require_once '../model/Category.php';
-                  echo (new Category())->select()->count();
-                  ?>
-              </span>
-            </a>
-            <ul class="menu-content">
-              <li><a class="menu-item" href="../view/add_category.php" data-i18n="nav.templates.vert.main">Add New Category</a>
-              </li>
-              <li><a class="menu-item" href="../view/show_category.php" data-i18n="nav.templates.horz.main">Show Category</a>
-              </li>
-            </ul>
-          </li>
-          <!-- --- -->
           <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title" data-i18n="nav.templates.main">Shops</span>
               <span class="badge badge badge-info badge-pill float-right mr-2">
-                  <?php
-                  require_once '../model/Store.php';
-                  echo (new Store())->select()->count();
-                  ?>
+                <?php
+                require_once '../model/Store.php';
+                echo (new Store())->select()->count();
+                ?>
               </span>
             </a>
             <ul class="menu-content">
@@ -45,6 +29,23 @@
               </li>
             </ul>
           </li>
+          <!-- --- -->
+          <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title" data-i18n="nav.templates.main">Category</span>
+              <span class="badge badge badge-info badge-pill float-right mr-2">
+                <?php
+                require_once '../model/Category.php';
+                echo (new Category())->select()->count();
+                ?>
+              </span>
+            </a>
+            <ul class="menu-content">
+              <li><a class="menu-item" href="../view/add_category.php" data-i18n="nav.templates.vert.main">Add New Category</a>
+              </li>
+              <li><a class="menu-item" href="../view/show_category.php" data-i18n="nav.templates.horz.main">Show Category</a>
+              </li>
+            </ul>
+          </li>
+
         </ul>
         <!--END-->
       </li>
